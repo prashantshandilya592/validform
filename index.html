@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+   
+    <style>
+    body {
+    font-size: 16px;
+    font-family: system-ui;
+    background:-webkit-radial-gradient(top left, #e8c141,#80d195);
+}
+
+.form{
+    width: 100%;
+}
+h2 {
+    text-align: center;
+    color: #ef6e58;
+}
+form {
+    width: 300px;
+    padding: 15px 40px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    margin: 4% auto;
+}
+label {
+    display: block;
+    margin-bottom: 5px
+}
+label i {
+    color: #999;
+    font-size: 80%;
+}
+input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background-color: #a9bae64a;
+}
+.box {
+    padding-bottom: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 90%;
+}
+input[type=text]{
+        outline: none;
+}
+
+input[type="submit"] {
+    font-size: 110%;
+    font-weight: 100;
+    background: #ef6e58;
+    border-color: #ef6e58;
+    box-shadow: 0 3px 0 #bd432e;
+    color: #fff;
+    margin-top: 10px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background: #bd432e;
+    border-color: #bd432e;
+}
+
+.input-1{
+    
+    background-image: url(images/check.png);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    border:1px solid #01cc40;
+}
+.input-2{
+    background-image: url(images/cancel.png);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    border:1px solid red;
+}
+
+</style>
+</head>
+<body>
+   
+  <marquee scrollamount="30"><h1 align="center">Welcome To GEEKSTER</h1>  </marquee>
+
+<form name="Form" onsubmit="return validateForm()" >
+    <h2> Enter Details</h2>
+    <div class="box">
+        <label>Full Name</label>
+        <input type="text" name="name" required id="name">
+        <div class="error" id="nameErr"></div>
+    </div>
+    <div class="box">
+        <label>Email Address</label>
+        <input type="text" name="email" required id="email">
+        <div class="error" id="emailErr"></div>
+    </div>
+    <div class="box">
+        <label>Password</label>
+        <input type="password" name="password" max="10" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])" id="password">
+        <div class="error" id="passwordErr"></div>
+    </div>
+    <div class="box">
+        <label>Confirm Password</label>
+        <input type="password" name="cpassword" max="10" id="cpassword">
+        <div class="error" id="cpasswordErr"></div>
+    </div>
+  
+          
+    <div class="box">
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+<script>
+    function printError(Id, Msg) {
+    document.getElementById(Id).innerHTML = Msg;
+}
+
+function validateForm() {
+
+    var name = document.Form.name.value;
+    var email = document.Form.email.value;
+    var password = document.Form.password.value;
+    var cpassword = document.Form.cpassword.value;
+    
+    
+
+    var nameErr = emailErr = passwordErr = cpasswordErr = true;
+    
+
+    if(name == "") {
+        printError("nameErr", "Please enter your name");
+        var elem = document.getElementById("name");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } else {
+        var regex = /^[a-zA-Z\s]+$/;                
+        if(regex.test(name) === false) {
+            printError("nameErr", "Please enter a valid name");
+            var elem = document.getElementById("name");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } else {
+            printError("nameErr", "");
+            nameErr = false;
+            var elem = document.getElementById("name");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+
+            
+        }
+    }
+    
+
+    if(email == "") {
+        printError("emailErr", "Please enter your email address");
+         var elem = document.getElementById("email");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } else {
+        
+        var regex = /^\S+@\S+\.\S+$/;
+        if(regex.test(email) === false) {
+            printError("emailErr", "Please enter a valid email address");
+            var elem = document.getElementById("email");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } else{
+            printError("emailErr", "");
+            emailErr = false;
+             var elem = document.getElementById("email");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+
+        }
+    }
+    
+ 
+    if(password== "") {
+        printError("passwordErr", "Please enter your password ");
+        var elem = document.getElementById("password");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } else {
+        var regex = /^[1-9]\d{9}$/;
+        if(regex.test(password) === false) {
+            printError("passwordErr", "Please enter a valid password" );
+            var elem = document.getElementById("password");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } else{
+            printError("passwordErr", "");
+            passwordErr = false;
+            var elem = document.getElementById("password");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+        }
+    }
+    if(cpassword== "") {
+        printError("cpasswordErr", "Please enter your password ");
+        var elem = document.getElementById("cpassword");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } else {
+        var regex = /^[1-9]\d{9}$/;
+        if(regex.test(cpassword) === false) {
+            printError("cpasswordErr", "Please enter a valid  password" );
+            var elem = document.getElementById("cpassword");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } else{
+            printError("cpasswordErr", "");
+            cpasswordErr = false;
+            var elem = document.getElementById("cpassword");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+        }
+    }
+    
+
+    if((nameErr || emailErr || passwordErr || cpasswordErr) == true) {
+       return false;
+    } 
+};
+</script>
+</body>
+</html>
